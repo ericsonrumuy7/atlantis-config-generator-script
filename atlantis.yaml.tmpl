@@ -1,0 +1,20 @@
+version: 3
+projects:
+- name: $BASE_REPO_NAME
+  dir: .
+  autoplan:
+    enabled: true
+    when_modified: [\"*.tf\"]
+  workflow: custom
+
+workflows:
+  custom:
+    plan:
+      steps:
+      - init:
+      - plan:
+          extra_args: [$EXTRA_ARGS]
+    apply:
+      steps:
+      - apply:
+          extra_args: [$EXTRA_ARGS]
